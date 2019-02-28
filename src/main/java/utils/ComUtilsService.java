@@ -12,12 +12,29 @@ public class ComUtilsService {
     }
 
     public void writeTest() {
-        //TODO: put your code here
+        try {
+            comUtils.write_int32(9898);
+            comUtils.write_string("Testing");
+            comUtils.write_string_variable(2, "Enginyeria Informatica");
+            comUtils.write_char('A');
+        }catch (IOException e){
+            System.out.println("Error Found during Operation:" + e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     public String readTest() {
         String result = "";
-        //TODO: put your code here
+        try{
+            result += Integer.toString(comUtils.read_int32());
+            result += " | "+comUtils.read_string();
+            result += " | "+comUtils.read_string_variable(2);
+            result += " | "+comUtils.read_char();
+        }catch (IOException e){
+            System.out.println("Error Found during Operation:" + e.getMessage());
+            e.printStackTrace();
+        }
         return result;
     }
 

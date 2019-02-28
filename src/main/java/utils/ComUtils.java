@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.*;
+import java.net.Socket;
 
 public class ComUtils {
     private final int STRSIZE = 40;
@@ -8,9 +9,9 @@ public class ComUtils {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
 
-    public ComUtils(InputStream inputStream, OutputStream outputStream) throws IOException {
-        dataInputStream = new DataInputStream(inputStream);
-        dataOutputStream = new DataOutputStream(outputStream);
+    public ComUtils(Socket socket) throws IOException {
+        dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
     }
 
     public int read_int32() throws IOException {
@@ -107,7 +108,7 @@ public class ComUtils {
     }
 
     /* Llegir un string  mida variable size = nombre de bytes especifica la longitud*/
-    public  String read_string_variable(int size) throws IOException {
+    public String read_string_variable(int size) throws IOException {
         byte bHeader[] = new byte[size];
         char cHeader[] = new char[size];
         int numBytes = 0;
@@ -151,6 +152,18 @@ public class ComUtils {
         dataOutputStream.write(bHeader, 0, size);
         // Enviem l'string writeBytes de DataOutputStrem no envia el byte més alt dels chars.
         dataOutputStream.writeBytes(str);
+    }
+
+    /* Escriure un char */
+    public void write_char(char c) throws IOException {
+        byte bytes = (byte) c;
+
+        dataOutputStream.write(bytes);
+    }
+
+    /* Llegir un char */
+    public char read_char() throws IOException {
+        return (char) read_bytes(1)[0];
     }
 
     public enum Endianness {

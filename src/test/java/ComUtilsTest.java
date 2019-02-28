@@ -1,6 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.ComUtils;
+import utils.ComUtilsService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,27 @@ public class ComUtilsTest {
             assertEquals(2, readedInt);
 
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void first_test(){
+        File file = new File("test1");
+        try {
+            file.createNewFile();
+            ComUtils comUtils = new ComUtils(new FileInputStream(file), new FileOutputStream(file));
+
+            comUtils.write_char('!');
+            comUtils.write_string_variable(2,"Hey siri, what's the weather like?");
+
+            char charRead = comUtils.read_char();
+            assertEquals('!', charRead);
+            String stringRead = comUtils.read_string_variable(2);
+            System.out.println(stringRead);
+            assertEquals("Hey siri, what's the weather like?", stringRead);
+
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
