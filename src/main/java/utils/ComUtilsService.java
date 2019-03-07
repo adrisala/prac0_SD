@@ -8,7 +8,8 @@ public class ComUtilsService {
     private ComUtils comUtils;
 
     public ComUtilsService(InputStream inputStream, OutputStream outputStream) throws IOException {
-        comUtils = new ComUtils(inputStream, outputStream);
+        //comUtils = new ComUtils(socket.getInputStream(), outputStream);
+        comUtils = null;
     }
 
     public void writeTest() {

@@ -11,9 +11,17 @@ public class BlackjackUtilsServer {
 
     public void init(int initialBet) throws IOException {
         String funcName = comUtils.read_string();
-        int clientId = comUtils.read_int32();
 
         //Inicialitzar aposta minima
+        if(!funcName.equals("STRT"))
+            throw new IOException("...");
+
+        comUtils.read_char();
+        int clientId = comUtils.read_int32();
+
+        comUtils.write_string("INIT");
+        comUtils.write_char(' ');
+        comUtils.write_int32(initialBet);
     }
 
     public void initialDeck(){

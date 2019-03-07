@@ -6,9 +6,11 @@ import java.net.*;
 import java.util.Scanner;
 
 public class Servidor {
+
     public static void main(String[] args){
         ServerSocket serverSocket = null;
         Socket socket = null;
+
         Scanner sc = new Scanner(System.in);
 
         BlackjackUtilsServer blackjackUtilsServer;
@@ -39,6 +41,8 @@ public class Servidor {
                 minimalBet = sc.nextInt();
 
                 blackjackUtilsServer.init(minimalBet);
+
+
             }
         }catch(IOException e){
 
